@@ -11,18 +11,19 @@ Views/MainWindow.axaml
 ```markup
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:Todo.Views"
         x:Class="Todo.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Width="200" Height="300"
-        Title="Avalonia Todo"
-        Content="{Binding List}">
+        Title="Avalonia Todo">
+	<views:TodoListView DataContext="{Binding List}" />
 </Window>
 ```
 
 The main change is that instead of using a `<views:TodoListView/>` control as the content of the window, we're now binding the window's content to the `MainWindowViewModel.List` property, which contains our list:
 
 ```markup
-Content="{Binding List}"
+DataContext="{Binding List}"
 ```
 
 `{Binding}` is a markup extension which instantiates a [binding](https://docs.avaloniaui.net/docs/data-binding/bindings) to a property on a control's `DataContext`. You'll remember that in `App.axaml.cs` we [assigned an instance of `MainWindowViewModel` to the window's `DataContext` property](https://docs.avaloniaui.net/tutorials/todo-list-app/creating-a-model-and-viewmodel#create-an-instance-of-todolistviewmodel).
